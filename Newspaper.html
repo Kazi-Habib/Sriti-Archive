@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newspaper Clippings - Smriti</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Galada&display=swap" rel="stylesheet">
+<style>
+:root{ --bg:#051429; --gold:#d99635; --white:#f7f7f7; --text:#b0c4de; --text-dim:#8fa0b5; }
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ background:var(--bg); font-family:'Inter',sans-serif; color:white; padding-top:140px; line-height: 1.7; }
+
+/* NAVBAR */
+header{ position:fixed; top:0; left:0; width:100%; padding:25px 50px; display:flex; align-items:center; justify-content:space-between; z-index:1000; background: #051429; border-bottom:1px solid rgba(255,255,255,.05); }
+.logo-wrap{ display:flex; align-items:center; gap:20px; }
+.logo{ font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:700; color:white; text-decoration: none; display: flex; align-items: center; }
+.logo span { font-family: 'Galada', cursive; font-size: 32px; color: var(--gold); margin-left: 12px; font-weight: 400; }
+.logo-text{ font-size:13px; color:#8fa0b5; max-width: 120px; line-height: 1.3; display: block; }
+nav{ display:flex; align-items: center; gap:40px; }
+nav a{ text-decoration:none; color:white; font-size:16px; font-weight: 500; transition:.3s; }
+nav a:hover, nav a.active{ color:var(--gold); }
+
+/* MAIN CONTENT */
+.main-section { padding: 40px 50px 100px 50px; max-width: 1400px; margin: 0 auto; }
+.page-title { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 700; color: white; margin-bottom: 15px; }
+.page-subtitle { color: var(--gold); font-size: 18px; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 50px; }
+
+/* NEWSPAPER GRID */
+.clippings-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 20px; }
+.clipping-card { background: #081a33; border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; overflow: hidden; transition: 0.3s ease; cursor: pointer; display: flex; flex-direction: column; }
+.clipping-card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(217, 150, 53, 0.1); }
+
+.image-container { width: 100%; height: 280px; overflow: hidden; background: #040e1c; }
+.image-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
+.clipping-card:hover .image-container img { transform: scale(1.05); }
+
+.card-info { padding: 25px; border-top: 1px solid rgba(255,255,255,0.03); }
+.clipping-meta { font-size: 12px; color: var(--gold); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.clipping-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: white; line-height: 1.3; }
+
+/* LIGHTBOX POPUP MODAL WITH BETTER SCROLL AND ZOOM OPTIONS */
+.lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 14, 28, 0.96); backdrop-filter: blur(12px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
+.lightbox.active { display: flex; }
+
+.lightbox-content { max-width: 700px; width: 100%; max-height: 90vh; background: #061831; border: 1px solid rgba(217, 150, 53, 0.3); border-radius: 12px; overflow-y: auto; position: relative; animation: zoomIn 0.3s ease; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+@keyframes zoomIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.lightbox-img-wrap { width: 100%; background: #030a14; display: flex; justify-content: center; align-items: center; padding: 10px 0; overflow: hidden; }
+.lightbox-img-wrap img { max-width: 100%; max-height: 50vh; object-fit: contain; cursor: zoom-in; transition: transform 0.2s ease; }
+
+/* Interactive zoom state when clicking the picture */
+.lightbox-img-wrap img.zoomed { transform: scale(1.8); max-height: none; cursor: zoom-out; }
+
+.lightbox-text-wrap { padding: 25px 30px; background: #061831; border-top: 1px solid rgba(255,255,255,0.05); }
+.lightbox-close { position: absolute; top: 15px; right: 20px; background: rgba(0,0,0,0.5); border: none; color: white; font-size: 30px; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: 0.2s; }
+.lightbox-close:hover { color: var(--gold); background: rgba(0,0,0,0.8); }
+
+.lightbox-caption-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--gold); font-weight: 700; margin-bottom: 10px; line-height: 1.3; padding-right: 30px; }
+.lightbox-caption-desc { color: var(--text); font-size: 15px; line-height: 1.6; text-align: justify; white-space: pre-line; }
+
+@media(max-width:1200px) { nav, .logo-text { display: none; } .clippings-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:768px) { .clippings-grid { grid-template-columns: 1fr; } .main-section { padding: 40px 25px; } .lightbox-content { max-width: 95%; max-height: 85vh; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <a href="index.html" class="logo">Smriti<span>স্মৃতি</span></a>
+    <div class="logo-text">A Flood Archive of Bangladesh</div>
+  </div>
+  <nav>
+    <a href="gallery.html">2024 Gallery</a>
+    <a href="about.html">About</a>
+    <a href="testimony.html">Testimony</a>
+    <a href="newspaper.html" class="active">Newspaper</a>
+    <a href="historical.html">Historical Context</a>
+  </nav>
+</header>
+
+<section class="main-section">
+  <h1 class="page-title">Newspaper Clippings</h1>
+  <p class="page-subtitle">The Flood as Documented by the Press</p>
+
+  <div class="clippings-grid">
+    
+    <!-- CARD 1 -->
+    <div class="clipping-card" onclick="openLightbox('image/n-2.png', 'Feni Villages are Still Inundated', `Seven members of a family, who have been stranded on the roof of their home in Feni for the last three days, are yet to be rescued.\n\nRescue boats are unable to make it to the spot due to a heavy flow of water.\n\nFarzana Akhter, a member of the family who resides in Chattogram, has been trying to reach the stranded relatives. She moved some people to the village, but none of them could reach there due to a heavy flow of water.\n\nWhile talking to Prothom Alo on Saturday, Farzana said the area is now completely underwater, with severe currents. She managed to contact them for the last time around 7:00 pm on Thursday. Her sister in-law, Taniya Akhter, told her they were starving.`)">
+      <div class="image-container">
+        <img src="image/n-2.png" alt="Newspaper Clipping 1"> 
+      </div>
+      <div class="card-info">
+        <div class="clipping-meta">August 22, 2024</div>
+        <h3 class="clipping-title">Feni Villages are Still Inundated</h3>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="clipping-card" onclick="openLightbox('image/n-6.png', 'Jago News 24 — Fresh flood fears grip Feni as rivers continue to rise', `District Correspondent, Feni\nPublished: 7 July 2026, 11:39 AM\n\nThe traumatic memories of the devastating floods that swept through Feni in August 2024 continue to haunt residents. The scars of losing homes, crops and livelihoods remain fresh. Now, persistent rainfall triggered by upstream hill runoff and an active monsoon has caused water levels in the district's major rivers to rise once again, renewing fears across the district following the latest warning from the Flood Forecasting and Warning Centre (FFWC).\n\nAccording to the Feni Meteorological Office, residents, particularly those living in riverine and low-lying char areas, are gripped by fresh anxiety. The district recorded 96 millimetres of`)">
+      <div class="image-container">
+        <img src="image/n-6.png" alt="Newspaper Clipping 2">
+      </div>
+      <div class="card-info">
+        <div class="clipping-meta">July 07, 2026</div>
+        <h3 class="clipping-title">Fresh flood fears grip Feni as rivers continue to rise</h3>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="clipping-card" onclick="openLightbox('image/n-7.png', 'News Desk — Feni prepares 224 shelters ahead of flood threat', `News Desk\n9 July 2026 20:02 Updated: 9 July 2026 20:02\n\nAuthorities in Feni have completed extensive preparations to challenge potential flooding, readying 224 shelters and stockpiling relief materials and rescue equipment to minimise possible damage.\n\nThe measures were finalised at an emergency meeting of the District Disaster Management Committee on Wednesday, where officials focused on ensuring adequate food supplies, emergency shelters and rescue capacity.\n\nAccording to the district administration, a total of 224 shelters—80 permanent and 144 temporary—have been kept ready to accommodate affected residents if floodwaters rise.`)">
+      <div class="image-container">
+        <img src="image/n-7.png" alt="Newspaper Clipping 3">
+      </div>
+      <div class="card-info">
+        <div class="clipping-meta">July 09, 2026</div>
+        <h3 class="clipping-title">Feni prepares 224 shelters ahead of flood threat</h3>
+      </div>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="clipping-card" onclick="openLightbox('image/n-8.png', 'I have lost everything', `Devastating floods in Bangladesh have left 1.24 million families stranded, causing widespread devastation. Heavy monsoon rains triggered the rising waters, with some accusing an upstream Indian dam release of exacerbating the crisis.\n\nThis image shows a mother and baby floating on a makeshift banana raft in Feni on August 22, 2024. Countless others face a similar plight, having lost homes and belongings. With food and clean water scarce, the humanitarian situation is dire.\n\nAs the climate crisis intensifies, Bangladesh, like many low-lying nations, faces an increasing threat from extreme weather events. International assistance is crucial to support the affected communities and build resilience against future floods.`)">
+      <div class="image-container">
+        <img src="image/n-8.png" alt="Newspaper Clipping 4">
+      </div>
+      <div class="card-info">
+        <div class="clipping-meta">August 25, 2024</div>
+        <h3 class="clipping-title">I have lost everything</h3>
+      </div>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="clipping-card" onclick="openLightbox('image/n-5.png', 'FLOODS DEVASTATE BANGLADESH: 1.2 MILLION FAMILIES STRANDED', `DHAKA — Catastrophic monsoon flooding has left over 1.24 million families stranded across Bangladesh. As floodwaters slowly recede, millions face the grim reality of lost homes and ruined livelihoods.\n\nIn Feni, one of the hardest-hit districts, stranded residents have been forced to navigate submerged streets on makeshift banana-leaf rafts to survive. Local anger is mounting, with many blaming an upstream Indian dam release for worsening the sudden deluge.\n\nWith clean water and food in critically short supply, humanitarian agencies warn of an escalating crisis unless immediate aid arrive.`)">
+      <div class="image-container">
+        <img src="image/n-5.png" alt="Newspaper Clipping 5">
+      </div>
+      <div class="card-info">
+        <div class="clipping-meta">August 25, 2024</div>
+        <h3 class="clipping-title">Floods Devastate Bangladesh</h3>
+      </div>
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="clipping-card" onclick="openLightbox('news6.jpg', 'Eight dead, two million affected by Bangladesh floods', `The death toll from floods in Bangladesh this week has risen to eight, leaving more than two million affected after heavy rains caused major rivers to burst their banks, officials have confirmed.\n\nThe south Asian country of 170 million people, crisscrossed by hundreds of rivers, has experienced more frequent floods in recent decades.\n\nThe climate crisis has caused rainfall to become more erratic and melted glaciers upstream in the Himalayan mountains.\n\nTwo teenage boys were killed when a boat capsized in flood waters in Shahjadur, the northern rural town’s police chief, Sabuj Rana, said.\n\n“There were nine people in the small boat. Seven swam to safety. Two boys did not know how to swim. They drowned,” he said.\n\nBishwadeb Roy, a police chief in Kurigram, said that three others had been killed in two separate electrocution incidents after their boats became entangled with live electricity wires in flood water.`)">
+      <div class="image-container">
+        <img src="image/n-12.png" alt="Newspaper Clipping 6">
+      </div>
+      <div class="card-info">
+        <div class="clipping-meta">August 26, 2024</div>
+        <h3 class="clipping-title">Eight dead, two million affected by Bangladesh floods</h3>
+      </div>
+    </div>
+
+    <!-- CARD 7 (UPDATED) -->
+    <div class="clipping-card" onclick="openLightbox('image/n-3.png', 'Bangladesh floods maroon nearly three million people', `Relentless monsoon rains and flooding have stranded nearly three million people in Bangladesh and killed two, submerging vast areas and damaging homes and infrastructure, officials from the country's disaster management ministry said on Thursday.\n\nReuters TV showed Bangladesh residents evacuating with their belongings by boat and other makeshift transportation as knee-deep water entered their homes.`)">
+      <div class="image-container">
+        <img src="image/n-3.png" alt="Newspaper Clipping 7">
+      </div>
+      <div class="card-info">
+        <div class="clipping-meta">August 27, 2024</div>
+        <h3 class="clipping-title">Bangladesh floods maroon nearly three million people</h3>
+      </div>
+    </div>
+
+    <!-- CARD 8 -->
+    <div class="clipping-card" onclick="openLightbox('image/n-10.png', 'BDRCS — Situation Report | Bangladesh Flood 2024', `Bangladesh Red Crescent Society (BDRCS)\nReport Date: 8 Jul\nSituation Report | 7 July 2024 | 14:00 hrs\n\nHotline (Toll Free): 16226 (9.00 AM to 4.00 PM)`)">
+      <div class="image-container">
+        <img src="image/n-10.png" alt="Newspaper Clipping 8">
+      </div>
+      <div class="card-info">
+        <div class="clipping-meta">July 08, 2024</div>
+        <h3 class="clipping-title">Situation Report: Bangladesh Flood 2024 (BDRCS)</h3>
+      </div>
+    </div>
+
+    <!-- CARD 9 -->
+    <div class="clipping-card" onclick="openLightbox('image/n-4.png', 'Feni floods leave behind trail of destruction worth 146C', `• Agricultural losses hit Tk38 crore, affecting nearly 29,000 farmers\n• Fisheries and livestock sectors report combined damages exceeding Tk9 crore`)">
+      <div class="image-container">
+        <img src="image/n-4.png" alt="Newspaper Clipping 9">
+      </div>
+      <div class="card-info">
+        <div class="clipping-meta">August 30, 2024</div>
+        <h3 class="clipping-title">Feni floods leave behind trail of destruction worth 146C</h3>
+      </div>
+    </div>
+
+    <!-- CARD 10 -->
+    <div class="clipping-card" onclick="openLightbox('image/n-9.png', 'Bangladesh Likely to Face Flooding in July- August', `Bangladesh may witness flooding in the Brahmaputra and Meghna river basins in July and August this year due to heavy precipitation in their upper catchment areas, according to the Flood Forecasting and Warning Centre (FFWC).\n\n&quot;Bangladesh remains vulnerable to flooding in July and August due to climatic reasons. During this period, heavy rainfall occurs in major river basins and upstream areas, triggering flood situations in the country,&quot; said Sarder Udoy Raihan, FFWC Executive Engineer at the Bangladesh Water Development Board (BWDB).`)">
+      <div class="image-container">
+        <img src="image/n-9.png" alt="Newspaper Clipping 10">
+      </div>
+      <div class="card-info">
+        <div class="clipping-meta">September 02, 2024</div>
+        <h3 class="clipping-title">Bangladesh Likely to Face Flooding in July- August</h3>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LIGHTBOX MODAL -->
+<div class="lightbox" id="imageLightbox" onclick="closeLightbox()">
+  <div class="lightbox-content" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    
+    <div class="lightbox-img-wrap">
+      <img id="lightboxImg" src="" alt="Enlarged Newspaper View" onclick="toggleZoom(event)">
+    </div>
+    
+    <div class="lightbox-text-wrap">
+      <h3 id="lightboxTitle" class="lightbox-caption-title"></h3>
+      <p id="lightboxDesc" class="lightbox-caption-desc"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+function openLightbox(imgSrc, titleText, descText) {
+  const lightboxImg = document.getElementById('lightboxImg');
+  lightboxImg.src = imgSrc;
+  lightboxImg.classList.remove('zoomed'); 
+  
+  document.getElementById('lightboxTitle').innerText = titleText;
+  document.getElementById('lightboxDesc').innerText = descText;
+  document.getElementById('imageLightbox').classList.add('active');
+  document.body.style.overflow = 'hidden'; 
+}
+
+function closeLightbox() {
+  document.getElementById('imageLightbox').classList.remove('active');
+  document.body.style.overflow = 'auto'; 
+}
+
+function toggleZoom(event) {
+  event.stopPropagation(); 
+  const img = event.target;
+  img.classList.toggle('zoomed');
+}
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    closeLightbox();
+  }
+});
+</script>
+
+</body>
+</html>

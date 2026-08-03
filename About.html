@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - Smriti</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Galada&display=swap" rel="stylesheet">
+<style>
+:root{ --bg:#071b36; --gold:#d99635; --white:#f7f7f7; --text:#d7dce4; --text-dim:#a0aec0; }
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ background:var(--bg); font-family:'Inter',sans-serif; color:white; padding-top:140px; line-height: 1.7; }
+
+/* NAVBAR */
+header{ position:fixed; top:0; left:0; width:100%; padding:18px 40px; display:flex; align-items:center; justify-content:space-between; z-index:1000; background: rgba(7, 27, 54, 0.95); backdrop-filter: blur(10px); border-bottom:1px solid rgba(255,255,255,.08); }
+.logo-wrap{ display:flex; align-items:center; gap:25px; }
+.logo{ font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:700; color:white; text-decoration: none; display: flex; align-items: center; }
+.logo span { font-family: 'Galada', cursive; font-size: 32px; color: var(--gold); margin-left: 12px; font-weight: 400; }
+.logo-text{ font-size:14px; color:#d8d8d8; max-width: 120px; line-height: 1.2; display: block; }
+nav{ display:flex; gap:35px; }
+nav a{ text-decoration:none; color:white; font-size:16px; font-weight: 500; transition:.3s; }
+nav a:hover, nav a.active{ color:var(--gold); }
+.nav-btn{ padding:12px 24px; background:var(--gold); color:white; text-decoration:none; border-radius:4px; font-weight:500; transition: 0.3s; }
+.nav-btn:hover { background: #bf812a; }
+
+/* CONTENT STYLING */
+.container { max-width: 850px; margin: 0 auto; padding: 40px 20px 100px 20px; }
+
+/* HERO SECTION (WHY SMRITI) */
+.hero-concept { text-align: center; margin-bottom: 80px; }
+.hero-concept h1 { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 700; color: white; margin-bottom: 20px; }
+.hero-concept h1 span { font-family: 'Galada', cursive; color: var(--gold); font-size: 45px; margin-right: 10px; font-weight: 400; }
+.hero-lead { font-size: 20px; color: var(--gold); font-style: italic; font-weight: 300; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+
+/* TEXT BLOCKS */
+.narrative-p { font-size: 17px; color: var(--text); margin-bottom: 25px; text-align: justify; }
+.narrative-p strong { color: white; }
+
+/* SECTION HEADINGS */
+.sub-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: white; margin-top: 60px; margin-bottom: 20px; font-weight: 600; border-left: 3px solid var(--gold); padding-left: 20px; }
+
+/* THREE BELIEFS CARD SYSTEM */
+.beliefs-container { margin-top: 40px; display: flex; flex-direction: column; gap: 25px; }
+.belief-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06); padding: 30px; border-radius: 10px; transition: 0.3s; }
+.belief-card:hover { border-color: rgba(217, 150, 53, 0.4); background: rgba(255, 255, 255, 0.03); }
+.belief-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--gold); margin-bottom: 10px; font-weight: 600; }
+.belief-card p { font-size: 15px; color: var(--text-dim); }
+
+/* FOOTER CALL TO ACTION */
+.cta-box { margin-top: 80px; background: linear-gradient(135deg, rgba(217, 150, 53, 0.1), transparent); border: 1px solid rgba(217, 150, 53, 0.2); padding: 40px; border-radius: 12px; text-align: center; }
+.cta-box p { font-size: 16px; color: var(--text); margin-bottom: 20px; }
+.cta-box em { color: var(--gold); font-weight: 500; font-style: normal; }
+.footer-note { font-size: 14px; color: var(--text-dim); margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; }
+
+@media(max-width:1100px) { nav, .logo-text { display: none; } }
+@media(max-width:768px) { .hero-concept h1 { font-size: 40px; } .hero-concept h1 span { font-size: 32px; } .hero-lead { font-size: 18px; } .sub-title { font-size: 28px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <a href="index.html" class="logo">Smriti<span>স্মৃতি</span></a>
+    <div class="logo-text">A Flood Archive of Bangladesh</div>
+  </div>
+  <nav>
+    <a href="gallery.html">2024 Gallery</a>
+    <a href="about.html" class="active">About</a>
+    <a href="testimony.html">Testimony</a>
+    <a href="newspaper.html">Newspaper</a>
+    <a href="historical.html">Historical Context</a>
+  </nav>
+</header>
+
+<main class="container">
+  
+  <!-- Hero Section -->
+  <div class="hero-concept">
+    <h1>Why <span>স্মৃতি</span> — Smriti?</h1>
+    <p class="hero-lead">Smriti means memory in Bengali. And memory is exactly what this archive is built to protect.</p>
+  </div>
+
+  <!-- Narrative Text -->
+  <p class="narrative-p">Floods in Bangladesh are recorded as disasters — in hectares lost, in crores of taka, in displacement figures released by government offices. Those numbers matter. <strong>But they do not carry what it felt like.</strong></p>
+  
+  <p class="narrative-p">They do not carry the farmer who watched the water cross his threshold for the very first time, not knowing how high it would rise. The mother who kept her children on a school roof for three days, rationing biscuits among strangers. The neighbour who carried an elderly woman through chest-deep current because there was simply no one else. <strong>These are not footnotes to the data. They are the record.</strong></p>
+
+  <!-- What This Archive Is Built For -->
+  <h2 class="sub-title">What This Archive Is Built For</h2>
+  <p class="narrative-p">Smriti was built on a simple conviction: the people most shaped by Bangladesh's floods rarely write their own histories. This archive sits beside cold statistics to preserve what official reports leave out—who was there, what was lost in that first terrifying hour, and what survival truly cost. A flood doesn't end when the water recedes; it leaves behind a fear that echoes in every sudden rain, reaching even family abroad, who wait helplessly through the agonizing silence of unreachable phones. Yet from that terror emerges a story of human connection—ordinary people becoming each other's lifelines, standing shoulder-to-shoulder, sharing what little they had, swimming through danger to reach one another. We keep this record so these experiences, acts of courage, and moments of togetherness are never washed away by time.</p>
+
+  <!-- Three Things We Believe -->
+  <h2 class="sub-title">Three Things We Believe</h2>
+  <div class="beliefs-container">
+    <div class="belief-card">
+      <h3>1. Floods are more than numbers</h3>
+      <p>Every statistic in this archive has a human story behind it. We hold both — the data and the weight of it.</p>
+    </div>
+    <div class="belief-card">
+      <h3>2. First experiences matter</h3>
+      <p>For many families, a flood is something they have heard about their whole lives — until the day it arrives at their door. That moment of first encounter, of disbelief turning into survival, is something this archive is specifically built to record.</p>
+    </div>
+    <div class="belief-card">
+      <h3>3. The struggle does not end when the water recedes</h3>
+      <p>Recovery is slow, uneven, and largely invisible. This archive follows communities beyond the flood itself — into the weeks and months of rebuilding lives, livelihoods, and a sense of safety.</p>
+    </div>
+  </div>
+
+  <!-- Where We Begin -->
+  <h2 class="sub-title">Where We Begin</h2>
+  <p class="narrative-p">We begin with the August 2024 floods in Feni, Noakhali, and Cumilla — the most severe inundation the southeast has seen in a generation. That is where this project started: in the urgency of watching a crisis unfold and realising the human story was already disappearing beneath the next news cycle.</p>
+  <p class="narrative-p">From there, we reach back — to 1998, to 1988, to 1974 — because Bangladesh's relationship with floods did not begin in 2024, and neither did its people's courage.</p>
+
+  <!-- This Archive Is Incomplete — Intentionally -->
+  <h2 class="sub-title">This Archive Is Incomplete — Intentionally</h2>
+  <p class="narrative-p">Memory is always incomplete. What we can do is keep adding to it — carefully, honestly, and with the full consent of the people whose experiences we are entrusted to hold.</p>
+
+  <!-- Call to Action -->
+  <div class="cta-box">
+    <p>If you lived through a flood in Bangladesh — <em>any flood, any year</em> — your story belongs here.</p>
+    <a href="testimony.html" class="nav-btn">Share Your Story</a>
+  </div>
+
+  <!-- Footer Note -->
+  <div class="footer-note">
+    <p>Smriti is non-governmental, non-partisan, and community-built. All sources are publicly available and cited. This is not a disaster database. It is a record of people.</p>
+  </div>
+
+</main>
+
+</body>
+</html>

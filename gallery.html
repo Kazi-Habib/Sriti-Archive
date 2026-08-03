@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2024 Gallery - Smriti</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght=400;500;600;700&family=Inter:wght=300;400;500;600&family=Galada&display=swap" rel="stylesheet">
+<style>
+:root{ --bg:#071b36; --gold:#d99635; --white:#f7f7f7; --text:#d7dce4; --text-dim:#a0aec0; }
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ background:var(--bg); font-family:'Inter',sans-serif; color:white; padding-top:140px; }
+
+/* NAVBAR */
+header{ position:fixed; top:0; left:0; width:100%; padding:18px 40px; display:flex; align-items:center; justify-content:space-between; z-index:1000; background: rgba(7, 27, 54, 0.95); backdrop-filter: blur(10px); border-bottom:1px solid rgba(255,255,255,.08); }
+.logo-wrap{ display:flex; align-items:center; gap:25px; }
+.logo{ font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:700; color:white; text-decoration: none; display: flex; align-items: center; }
+.logo span { font-family: 'Galada', cursive; font-size: 32px; color: var(--gold); margin-left: 12px; font-weight: 400; }
+.logo-text{ font-size:14px; color:#d8d8d8; max-width: 120px; line-height: 1.2; display: block; }
+nav{ display:flex; gap:35px; }
+nav a{ text-decoration:none; color:white; font-size:16px; font-weight: 500; transition:.3s; }
+nav a:hover, nav a.active{ color:var(--gold); }
+.nav-btn{ padding:12px 24px; background:var(--gold); color:white; text-decoration:none; border-radius:4px; font-weight:500; transition: 0.3s; }
+.nav-btn:hover { background: #bf812a; }
+
+/* GALLERY GRID STYLE */
+.main-section { padding: 40px 50px 100px 50px; max-width: 1200px; margin: 0 auto; }
+.section-title { text-align:center; font-family:'Cormorant Garamond',serif; font-size:60px; font-weight:700; margin-bottom:10px; }
+.section-subtitle { text-align: center; color: var(--text-dim); font-size: 16px; margin-bottom: 20px; }
+.line { width:70px; height:3px; background:var(--gold); margin:auto; margin-bottom:60px; }
+
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.gallery-card { background: rgba(255,255,255, 0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden; position: relative; transition: 0.3s ease; height: 380px; cursor: pointer; }
+.gallery-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+
+.card-img-wrap { width: 100%; height: 100%; position: relative; }
+.card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
+.gallery-card:hover .card-img-wrap img { transform: scale(1.05); }
+
+.card-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 40px 30px 25px 30px; background: linear-gradient(transparent, rgba(7, 27, 54, 0.95)); display: flex; flex-direction: column; justify-content: flex-end; }
+.card-location { color: var(--gold); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+.card-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: white; line-height: 1.3; }
+
+@media(max-width:1100px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } nav, .logo-text { display: none; } }
+@media(max-width:768px) { .section-title{ font-size:45px; } .gallery-grid { grid-template-columns: 1fr; } .main-section { padding: 20px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <a href="index.html" class="logo">Smriti<span>স্মৃতি</span></a>
+    <div class="logo-text">A Flood Archive of Bangladesh</div>
+  </div>
+  <nav>
+    <a href="gallery.html" class="active">2024 Gallery</a>
+    <a href="about.html">About</a>
+    <a href="testimony.html">Testimony</a>
+    <a href="newspaper.html">Newspaper</a>
+    <a href="historical.html">Historical Context</a>
+  </nav>
+</header>
+
+<section class="main-section">
+  <h2 class="section-title">2024 Gallery</h2>
+  <p class="section-subtitle">Visual documentation of the flood events, response, and resilience</p>
+  <div class="line"></div>
+  
+  <div class="gallery-grid">
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/30.jpg" alt="Flood Image 1">
+        <div class="card-overlay">
+          <span class="card-location">Feni District</span>
+          <h4 class="card-title">We thought we'd die of hunger.Now we fear death from water.</h4>
+        </div>
+      </div>
+    </div>
+    
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/03.jpg" alt="Flood Image 2">
+        <div class="card-overlay">
+          <span class="card-location">Shovopur, Chhagalnaiya, Feni</span>
+          <h4 class="card-title">We will grieve not, rather find / Strength in what remains behind.</h4>
+        </div>
+      </div>
+    </div>
+    
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/24.jpg" alt="Flood Image 3">
+        <div class="card-overlay">
+          <span class="card-location">Cumilla</span>
+          <h4 class="card-title">Houses Sunk in Water and the Dreams</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4 (UPDATED CAPTION) -->
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/15.jpg" alt="Flood Image 4">
+        <div class="card-overlay">
+          <span class="card-location">Noakhali Sadar</span>
+          <h4 class="card-title">Against the crashing tide of the world, her hands were the only anchor that held</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/31.jpg" alt="Flood Image 5">
+        <div class="card-overlay">
+          <span class="card-location">Burichang, Cumilla</span>
+          <h4 class="card-title">We are not drowning, we are fighting</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/11.jpg" alt="Flood Image 6">
+        <div class="card-overlay">
+          <span class="card-location">Feni Sadar</span>
+          <h4 class="card-title">Rising Waters Turn Roads into Waterways.</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/32.jpg" alt="Flood Image 7">
+        <div class="card-overlay">
+          <span class="card-location">Feni</span>
+          <h4 class="card-title">A Bird’s-eye View of a City Submerged by Floods</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/28.jpg" alt="Flood Image 8">
+        <div class="card-overlay">
+          <span class="card-location">Noakhali</span>
+          <h4 class="card-title">Protecting What Matters Most.</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/29.jpeg" alt="Flood Image 9">
+        <div class="card-overlay">
+          <span class="card-location">Feni,Fulgazi</span>
+          <h4 class="card-title">Water, water, everywhere, Nor any drop to drink</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/14.jpg" alt="Flood Image 10">
+        <div class="card-overlay">
+          <span class="card-location">Chouddagram, Cumilla</span>
+          <h4 class="card-title">Water Everywhere,Humanity Shines</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/27.jpg" alt="Flood Image 11">
+        <div class="card-overlay">
+          <span class="card-location">Feni,Sadar</span>
+          <h4 class="card-title">Shielding Love from Floods</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/23.jpg" alt="Flood Image 12">
+        <div class="card-overlay">
+          <span class="card-location">Feni Border Area</span>
+          <h4 class="card-title">Wild Spirit, which art moving everywhere; / Destroyer and preserver; hear, O hear!</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/33.jpg" alt="Flood Image 13">
+        <div class="card-overlay">
+          <span class="card-location">Sonagazi, Feni</span>
+          <h4 class="card-title">Only the vast waters wrapping the world—yet we pull together</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/35.webp" alt="Flood Image 14">
+        <div class="card-overlay">
+          <span class="card-location">Begumganj, Noakhali</span>
+          <h4 class="card-title">Humans first, humans last, No greater truth than human heart</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/34.webp" alt="Flood Image 15">
+        <div class="card-overlay">
+          <span class="card-location">Cumilla Rural</span>
+          <h4 class="card-title">The still, sad music of humanity.</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/38.png" alt="Flood Image 16">
+        <div class="card-overlay">
+          <span class="card-location">Dhaka-Chittagong Highway</span>
+          <h4 class="card-title">Strength in A Shared Journey</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/21.jpg" alt="Flood Image 17">
+        <div class="card-overlay">
+          <span class="card-location">Cumilla</span>
+          <h4 class="card-title">Love Outweighs the Loss.</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/39.webp" alt="Flood Image 18">
+        <div class="card-overlay">
+          <span class="card-location">Senbagh, Noakhali</span>
+          <h4 class="card-title">When the Flood Steals Your Playground</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/40.jpg" alt="Flood Image 19">
+        <div class="card-overlay">
+          <span class="card-location">Laksam, Cumilla</span>
+          <h4 class="card-title">Too Young for Such Heavy Loss</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/41.jpg" alt="Flood Image 20">
+        <div class="card-overlay">
+          <span class="card-location">Feni Station</span>
+          <h4 class="card-title">Humanity Shines in Deep Waters</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <div class="card-img-wrap">
+        <img src="image/42.jpeg" alt="Flood Image 21">
+        <div class="card-overlay">
+          <span class="card-location">Noakhali Remote Areas</span>
+          <h4 class="card-title">I am the master of my fate,
+
+I am the captain of my soul</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

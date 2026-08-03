@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonies - Smriti</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Galada&display=swap" rel="stylesheet">
+<style>
+:root{ --bg:#051429; --gold:#d99635; --white:#f7f7f7; --text:#b0c4de; --text-dim:#8fa0b5; }
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ background:var(--bg); font-family:'Inter',sans-serif; color:white; padding-top:140px; line-height: 1.6; }
+
+/* NAVBAR */
+header{ position:fixed; top:0; left:0; width:100%; padding:25px 50px; display:flex; align-items:center; justify-content:space-between; z-index:1000; background: #051429; border-bottom:1px solid rgba(255,255,255,.05); }
+.logo-wrap{ display:flex; align-items:center; gap:20px; }
+.logo{ font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:700; color:white; text-decoration: none; display: flex; align-items: center; }
+.logo span { font-family: 'Galada', cursive; font-size: 32px; color: var(--gold); margin-left: 12px; font-weight: 400; }
+.logo-text{ font-size:13px; color:#8fa0b5; max-width: 120px; line-height: 1.3; display: block; }
+nav{ display:flex; align-items: center; gap:40px; }
+nav a{ text-decoration:none; color:white; font-size:16px; font-weight: 500; transition:.3s; background: transparent; padding: 0; border: none; }
+nav a:hover, nav a.active{ color:var(--gold); }
+
+/* MAIN LAYOUT */
+.main-section { padding: 40px 50px 100px 50px; max-width: 1400px; margin: 0 auto; }
+
+/* TESTIMONY GRID (3 COLUMNS AS PER 05.PNG) */
+.testimony-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 20px; }
+.testimony-card { background: #081a33; border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; padding: 45px 35px; position: relative; transition: 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; min-height: 520px; cursor: pointer; }
+.testimony-card.highlighted { border: 1px solid #d99635; }
+
+.quote-icon { font-family: 'Cormorant Garamond', serif; font-size: 60px; color: #152d4d; position: absolute; top: 20px; left: 35px; line-height: 1; font-weight: 700; }
+.card-content { margin-top: 30px; }
+.card-excerpt { color: #b0c4de; font-family: 'Cormorant Garamond', serif; font-size: 21px; font-style: italic; margin-bottom: 20px; text-align: left; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* READ MORE LINK FROM IMAGE */
+.read-more { color: var(--gold); font-size: 14px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; margin-bottom: 30px; transition: 0.2s; }
+.testimony-card:hover .read-more { opacity: 0.8; }
+
+.card-footer { margin-top: auto; }
+.author-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: white; margin-bottom: 4px; }
+.author-location { color: var(--gold); font-size: 14px; font-weight: 500; letter-spacing: 0.5px; }
+
+/* MODAL CONTAINER */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 14, 28, 0.9); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.active { display: flex; }
+.modal-box { background: #0b2240; border: 1px solid rgba(217, 150, 53, 0.3); border-radius: 16px; max-width: 750px; width: 100%; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 20px 40px rgba(0,0,0,0.5); animation: fadeIn 0.3s ease; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.modal-header { padding: 30px 40px; border-bottom: 1px solid rgba(255,255,255,0.06); position: relative; }
+.modal-close { position: absolute; top: 30px; right: 40px; background: none; border: none; color: var(--text-dim); font-size: 30px; cursor: pointer; transition: 0.2s; }
+.modal-close:hover { color: var(--gold); }
+
+.modal-meta { font-size: 12px; color: var(--gold); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.modal-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700; color: white; line-height: 1.2; }
+.modal-author { font-size: 14px; color: var(--text-dim); margin-top: 5px; }
+
+.modal-body { padding: 40px; overflow-y: auto; font-size: 16px; color: #d7dce4; text-align: justify; }
+.modal-body p { margin-bottom: 20px; line-height: 1.8; }
+
+/* Custom Scrollbar for Modal */
+.modal-body::-webkit-scrollbar { width: 6px; }
+.modal-body::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+.modal-body::-webkit-scrollbar-thumb { background: rgba(217, 150, 53, 0.3); border-radius: 4px; }
+.modal-body::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+@media(max-width:1200px) { nav, .logo-text { display: none; } .testimony-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:800px) { .testimony-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <a href="index.html" class="logo">Smriti<span>স্মৃতি</span></a>
+    <div class="logo-text">A Flood Archive of Bangladesh</div>
+  </div>
+  <nav>
+    <a href="gallery.html">2024 Gallery</a>
+    <a href="about.html">About</a>
+    <a href="testimony.html" class="active">Testimony</a>
+    <a href="newspaper.html">Newspaper</a>
+    <a href="historical.html">Historical Context</a>
+  </nav>
+</header>
+
+<section class="main-section">
+  <div class="testimony-grid">
+    
+    <!-- CARD 1: IMRAN HASAN -->
+    <div class="testimony-card" onclick="openModal('modal-imran')">
+      <span class="quote-icon">“</span>
+      <div class="card-content">
+        <p class="card-excerpt">
+          A flood doesn't drown only the people standing in it. It reaches across oceans too — into a cramped flat in London, a dormitory in Kuala Lumpur, a labour camp in Dubai — wherever a son or daughter happens to be when the river break...
+        </p>
+        <span class="read-more">Read More →</span>
+      </div>
+      <div class="card-footer">
+        <h3 class="author-name">Imran Hasan</h3>
+        <p class="author-location">Chhagalnaiya, Feni (Living Abroad)</p>
+      </div>
+    </div>
+
+    <!-- CARD 2: ABU SAYED MOZUMDER -->
+    <div class="testimony-card highlighted" onclick="openModal('modal-sayed')">
+      <span class="quote-icon">“</span>
+      <div class="card-content">
+        <p class="card-excerpt">
+          I first realized the severity of the flood on 21 August 2024, around 4:00 in the morning. It had been raining continuously since the previous day, but I did not expect the situation to become so dangerous. Because I lived on th...
+        </p>
+        <span class="read-more">Read More →</span>
+      </div>
+      <div class="card-footer">
+        <h3 class="author-name">Abu Sayed Mozumder, (27)</h3>
+        <p class="author-location">Feni Sadar, Feni</p>
+      </div>
+    </div>
+
+    <!-- CARD 3: KAZI GOLAM HABIB -->
+    <div class="testimony-card" onclick="openModal('modal-habib')">
+      <span class="quote-icon">“</span>
+      <div class="card-content">
+        <p class="card-excerpt">
+          I am a night owl by nature. While the rest of my building slept, I was always the last one awake — sitting with my thoughts, lost in the quiet hours that belong only to those who cannot let the day go. That habit, as ordinary as it...
+        </p>
+        <span class="read-more">Read More →</span>
+      </div>
+      <div class="card-footer">
+        <h3 class="author-name">Kazi Golam Habib</h3>
+        <p class="author-location">Feni City, Feni District</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODAL 1: IMRAN HASAN -->
+<div class="modal-overlay" id="modal-imran" onclick="closeModal(event, 'modal-imran')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <button class="modal-close" onclick="document.getElementById('modal-imran').classList.remove('active')">&times;</button>
+      <div class="modal-meta">Feni Flood Archive, 2024</div>
+      <h3 class="modal-title">Five Days of Silence</h3>
+      <div class="modal-author"><strong>Interviewee:</strong> Imran Hasan | Chhagalnaiya, Feni (Living Abroad)</div>
+    </div>
+    <div class="modal-body">
+      <p>Imran Hasan was scrolling through his phone after his late shift in London when a video stopped him cold — a drone shot of rooftops poking out of brown water, a man wading chest-deep holding a child above his head. Feni, Bangladesh — worst flood in decades, the caption read.</p>
+      <p>He knew that bend in the road. He'd ridden a bicycle down it a thousand times as a boy in Chhagalnaiya.</p>
+      <p>His mother picked up on the third ring, her voice tight but steady. "We're alright, baba. The water came up fast, but we've moved upstairs. Your father is helping the neighbours move their cattle—"</p>
+      <p>The line went dead. He called back. Number not reachable. He texted anyway: <em>Ammu please call. I love you.</em> It never delivered.</p>
+      <p>A flood doesn't drown only the people standing in it. It reaches across oceans too — into a cramped flat in London, a dormitory in Kuala Lumpur, a labour camp in Dubai — wherever a son or daughter happens to be when the river back home breaks its banks. For everyone like Imran, the disaster wasn't something that happened there. It happened in the silence of an unanswered phone, thousands of miles away, where there was no water to wade through and nothing to do but wait.</p>
+      <p>That waiting nearly broke him.</p>
+      <p>He stopped going to his shifts. He stopped eating properly. He lay on his bed for hours, phone gripped in his hand, refreshing the same flood pages, watching the Coast Guard pull people off rooftops, searching every blurred face for his mother's. By the third day, the thought he'd been holding off arrived anyway: what if they are already gone, and she only said "we're fine" to keep me calm until there was no more time to say anything else.</p>
+      <p>He wasn't sleeping. He wasn't really speaking to anyone. His flatmate Russel sat with him most evenings and didn't say much, just kept the kettle going. Imran posted his mother's photo to a missing-persons group on the fourth day, hands shaking as he typed the caption, hating that part of him had already begun rehearsing the worst.</p>
+      <p>It is its own kind of drowning — to be perfectly safe and perfectly dry, and still feel like you're underwater. To go through ordinary motions, a kettle, a shift, while some part of your mind has gone still, waiting for news that won't come.</p>
+      <p>On the morning of the fifth day, the phone finally rang.</p>
+      <p>"Imran. Can you hear me?"</p>
+      <p>"Ammu—" His voice broke in half. "Is everyone—"</p>
+      <p>"We're alive, baba. We're alive." She was crying too, trying to hide it. "We went to your uncle's house when the water reached the courtyard. Four days with no phone, no power. A boat brought rice from the relief camp on the third day. Your father, your sister — everyone is here."</p>
+      <p>He sat on the floor with his back against the bed and just listened to her breathe.</p>
+      <p>"I thought—" he started, and couldn't finish.</p>
+      <p>"I know," she said softly. "We thought of you too, every hour — wondering if you knew, and were sitting somewhere far away, afraid, with no way to be of any use to us at all."</p>
+      <p>That weekend he sent almost everything in his savings account to his uncle, for rice, clean water, tin sheets for the roof. It wasn't enough — nothing felt like enough from so far away — but it was something to do with his hands instead of his fear.</p>
+      <p>The river had only reached one district. The fear had reached every Bangladeshi household abroad with a phone that wouldn't connect.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 2: ABU SAYED MOZUMDER -->
+<div class="modal-overlay" id="modal-sayed" onclick="closeModal(event, 'modal-sayed')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <button class="modal-close" onclick="document.getElementById('modal-sayed').classList.remove('active')">&times;</button>
+      <div class="modal-meta">Feni Flood Archive, 2024</div>
+      <h3 class="modal-title">An Unprecedented Crisis: Submerged but Unbroken</h3>
+      <div class="modal-author"><strong>Interviewee:</strong> Abu Sayed Mozumder, Age: 27 | Feni Sadar, Feni</div>
+    </div>
+    <div class="modal-body">
+      <p>I first realized the severity of the flood on 21 August 2024, around 4:00 in the morning. It had been raining continuously since the previous day, but I did not expect the situation to become so dangerous. Because I lived on the ground floor, I was the first to notice that floodwater had started entering our home. When I woke up, the water level inside the house was already around two to three feet deep.</p>
+      <p>I immediately rushed to wake up the other members of my family. Around the same time, the electricity went out. In the darkness, we worked together to gather our important belongings and move them to the second floor of the building. We spent the entire night trying to save what we could before the water rose any higher.</p>
+      <p>As the flood worsened, my family and I took shelter on the second floor. The water level continued to rise, and the current became extremely strong. For the next two to three days, it was impossible to leave the house. The streets had disappeared beneath the floodwater, and the force of the current made any attempt to go outside very dangerous. Everyone in my family was frightened and uncertain about what would happen next.</p>
+      <p>At first, we managed with the food we had stored at home and were able to cook using a gas cylinder. However, after a day, our biggest problem became drinking water. It felt strange and cruel to be surrounded by water everywhere while having none that was safe to drink. Because there was no electricity, our water pump could not operate, and we could not access enough clean water from our storage system. We also had no way to boil water safely.</p>
+      <p>After two days, I decided I had to leave the house and search for drinking water. I live with women in my family, so I felt responsible for finding help despite the risks. I swam and waded through floodwater for several kilometers in search of a safer area. Eventually, I reached a place where the water level was lower and encountered a rescue team that had arrived to assist flood-affected residents. They provided me with one liter of drinking water, a few packets of biscuits, and two packets of oral saline. Although the supplies were limited, they were extremely valuable to us at that moment.</p>
+      <p>One of the most painful memories I carry from the flood is something I witnessed after about three days. While moving through the flooded area, I saw a dead body floating in the water. The body had been wrapped in plastic and tied with empty water bottles so that it would not sink. I was shocked and deeply saddened by what I saw.</p>
+      <p>From what I understood, many families were facing impossible circumstances. With floodwater covering everything, some people could not reach burial grounds, while others could not even leave their homes. In such situations, families had few options for handling the bodies of loved ones who had passed away. Seeing this reality with my own eyes was heartbreaking.</p>
+      <p>Before the 2024 flood, I had never experienced anything like this. The fear, isolation, lack of clean water, and the scenes of human suffering left a lasting impact on me. It was a disaster that changed how I understand vulnerability, survival, and the value of community support during times of crisis.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 3: KAZI GOLAM HABIB -->
+<div class="modal-overlay" id="modal-habib" onclick="closeModal(event, 'modal-habib')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <button class="modal-close" onclick="document.getElementById('modal-habib').classList.remove('active')">&times;</button>
+      <div class="modal-meta">Feni Flood Archive, 2024</div>
+      <h3 class="modal-title">The Night the Water Came Without Warning</h3>
+      <div class="modal-author"><strong>Interviewee:</strong> Kazi Golam Habib | Feni City, Feni District</div>
+    </div>
+    <div class="modal-body">
+      <p>I am a night owl by nature. While the rest of my building slept, I was always the last one awake — sitting with my thoughts, lost in the quiet hours that belong only to those who cannot let the day go. That habit, as ordinary as it seemed, is the reason I can tell this story the way I do. Because I was there, fully awake, when the world outside our walls quietly began to drown.</p>
+      <p>It was the night of August 21st, 2024. The rains had been falling for two days straight — a persistent, grey curtain that had settled over Feni without much alarm. Rain in August is not unusual here. It is expected, almost welcome. So when I stepped outside that evening around 9 o'clock, everything appeared perfectly normal. The streets were wet, yes. There were puddles. But there was nothing — not a single sign — that would make any reasonable person fear what was coming.</p>
+      <p>I returned home to my apartment on the third floor of a four-storey building and stayed up as I always do. The hours passed. Midnight came and went. Then, somewhere around 3 in the morning, I heard it. Shouting. Frantic voices rising from the floors below. The kind of noise that cuts through silence and makes your chest tighten before your mind even understands why.</p>
+      <p>I opened my door. The people who lived on the ground floor — my neighbours, ordinary families — were rushing up the stairwell, arms full of whatever they could carry. Clothes, documents, children, cooking pots. Their faces were pale with panic and urgency. They were already on the second floor landings, trying to lift their belongings higher, racing against something I still couldn't see.</p>
+      <p>I looked down the stairwell. <strong>The entire ground floor was underwater.</strong> Not a puddle. Not a leak. The whole floor — submerged. Dark, muddy water had crept in silently through the night while we all slept, and by the time anyone knew, it had already swallowed everything below.</p>
+      <p>I remember the feeling that hit me — not just fear, but a kind of disbelief that borders on vertigo. I had been awake the whole night. I had heard nothing. No roar, no surge, no dramatic arrival. The water had simply come, patient and merciless, the way catastrophe sometimes does: without announcement.</p>
+      <p>I ran to wake my father. He came out, looked down, and stood there for a moment in silence. There are no words for the expression on a parent's face when they see something they cannot protect their family from. We were safe on the third floor, but safety, I would learn in the days that followed, is not the same as being alright.</p>
+      <p><strong>We were stuck inside for five days.</strong> The electricity was gone — not for a few hours, but for almost fifteen days across the town. For the first ten or twelve of those days, we had no way of knowing what was happening beyond our walls. No phone signal. No news. No way to reach anyone. No way for anyone to reach us.</p>
+      <p>I live next to the main road, and from my window I became a helpless witness to everything. I watched people who had taken shelter in half-constructed buildings nearby — bare concrete frames with no walls, no roofs — huddling there for three, four, five days. I watched them ration whatever little food they had managed to grab in those first terrified minutes. I watched them signal for help that was slow to arrive, because the floodwater was not just deep — it was fast and relentless, and even the rescue teams, the army, the navy, struggled to navigate through it. Some areas, especially the rural ones, were nearly unreachable.</p>
+      <p>But of all the things I witnessed from that window, one crisis repeated itself everywhere, without exception, in every face I saw: <strong>thirst.</strong></p>
+      <p>The tubewells were completely submerged. There was no clean drinking water. People who had survived the flood were now battling dehydration. It sounds almost absurd — to be surrounded by water and have nothing to drink — but that was the reality of those days. That singular desperation, that searching in people's eyes for something as basic as a clean glass of water, is something I will never forget.</p>
+      <p>Inside our apartment, we managed. I will not pretend otherwise — we were among the fortunate ones. We had some food, we had the height of the third floor, we had each other. But the silence was its own kind of suffering. For almost twelve days, I had no phone. No contact with the outside world. And the thought that consumed me, that I could not shake no matter how I tried, was my relatives in the rural areas.</p>
+      <p>I knew the flooding was worse outside the city. I knew the rescue teams could barely reach the outskirts, let alone the remote villages. I knew the tides were too strong, the paths too flooded, the distances too great. And I knew nothing — nothing — about whether the people I loved were safe. That helplessness, that not-knowing, has a weight to it that is hard to describe. You lie awake — and I was always awake — running through every possible outcome in your mind. Hoping. Praying. Calculating probabilities as if your mind can somehow negotiate with fate. It was in those twelve silent days that I truly understood what the people in my life meant to me.</p>
+      <p><strong>And then he came.</strong></p>
+      <p>My cousin — who lives in Dhaka — had been watching the news and growing increasingly desperate at the silence from our end. He could not reach us by phone. He had no way of knowing if we were alive. And so he did what very few people would do: he came. He joined a rescue team travelling from Dhaka to Feni. When he reached the city, the streets were still waterlogged, the lanes still flooded. And so, for the last stretch of the journey — <strong>nearly two kilometres — he swam. He swam to reach us.</strong></p>
+      <p>When he appeared at our door, soaking wet, exhausted, grinning with relief at the sight of us — I did not have words. I am not sure I do even now. There are moments that bypass language entirely, that lodge themselves somewhere deeper than memory. This was one of them. He had no guarantee we were alive. He had no way of knowing the water levels at our building. He came anyway. He swam anyway.</p>
+      <p>The floods of August 2024 took much from Feni. They took homes, livelihoods, belongings, a sense of safety that had been built over years. They took, from many families, far more than I am willing to write here. But they also showed me something that I think I had always known, yet never truly felt until those twelve days of silence and fear and watching from a window:</p>
+      <p style="color: var(--gold); font-size: 18px; font-family: 'Cormorant Garamond', serif; font-style: italic; text-align: center; margin: 30px 0;">
+        "That the real measure of a life is not in what you possess when the water rises, but in who comes swimming for you when it does."
+      </p>
+      <p>I know who my people are now. That is not nothing. That, perhaps, is everything.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(event, id) {
+  if (event.target.classList.contains('modal-overlay')) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+}
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    const activeModal = document.querySelector('.modal-overlay.active');
+    if (activeModal) {
+      activeModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  }
+});
+</script>
+
+</body>
+</html>
