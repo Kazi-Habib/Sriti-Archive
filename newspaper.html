@@ -58,8 +58,27 @@ nav a:hover, nav a.active{ color:var(--gold); }
 .lightbox-caption-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--gold); font-weight: 700; margin-bottom: 10px; line-height: 1.3; padding-right: 30px; }
 .lightbox-caption-desc { color: var(--text); font-size: 15px; line-height: 1.6; text-align: justify; white-space: pre-line; }
 
-@media(max-width:1200px) { nav, .logo-text { display: none; } .clippings-grid { grid-template-columns: repeat(2, 1fr); } }
-@media(max-width:768px) { .clippings-grid { grid-template-columns: 1fr; } .main-section { padding: 40px 25px; } .lightbox-content { max-width: 95%; max-height: 85vh; } }
+/* RESPONSIVE FIX FOR TABLET & MOBILE */
+@media screen and (max-width: 1024px) {
+  header { padding: 20px 30px; }
+  .clippings-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  nav { gap: 20px; }
+}
+
+@media screen and (max-width: 768px) {
+  body { padding-top: 160px; }
+  header { flex-direction: column; padding: 15px; gap: 15px; text-align: center; }
+  .logo-wrap { justify-content: center; }
+  .logo-text { display: none; }
+  nav { flex-wrap: wrap; justify-content: center; gap: 15px; }
+  nav a { font-size: 14px; }
+  .main-section { padding: 30px 20px 60px 20px; }
+  .page-title { font-size: 36px; }
+  .page-subtitle { font-size: 14px; margin-bottom: 30px; }
+  .clippings-grid { grid-template-columns: 1fr; gap: 20px; }
+  .lightbox-content { max-width: 95%; max-height: 85vh; }
+  .lightbox-text-wrap { padding: 20px; }
+}
 </style>
 </head>
 <body>

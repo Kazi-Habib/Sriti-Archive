@@ -1,205 +1,117 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Smriti - A Flood Archive of Bangladesh</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Galada&display=swap" rel="stylesheet">
-
 <style>
-
 :root{ --bg:#071b36; --gold:#d99635; --white:#f7f7f7; --text:#d7dce4; }
-
 *{ margin:0; padding:0; box-sizing:border-box; }
-
 body{ background:var(--bg); font-family:'Inter',sans-serif; color:white; }
 
-
-
 /* NAVBAR */
-
 header{ position:fixed; top:0; left:0; width:100%; padding:18px 40px; display:flex; align-items:center; justify-content:space-between; z-index:1000; background: rgba(7, 27, 54, 0.95); backdrop-filter: blur(10px); border-bottom:1px solid rgba(255,255,255,.08); }
-
 .logo-wrap{ display:flex; align-items:center; gap:25px; }
-
 .logo{ font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:700; color:white; text-decoration: none; display: flex; align-items: center; }
-
 .logo span { font-family: 'Galada', cursive; font-size: 32px; color: var(--gold); margin-left: 12px; font-weight: 400; }
-
 .logo-text{ font-size:14px; color:#d8d8d8; max-width: 120px; line-height: 1.2; display: block; }
-
 nav{ display:flex; gap:35px; }
-
 nav a{ text-decoration:none; color:white; font-size:16px; font-weight: 500; transition:.3s; }
-
 nav a:hover, nav a.active{ color:var(--gold); }
 
-
-
-
-
 /* HERO (FIXED HEIGHT & CUTOFF BUG) */
-
 .hero{ min-height: 100vh; display:flex; position:relative; padding-top: 100px; }
-
 .hero-left{ width:55%; display:flex; align-items:center; padding-left:50px; padding-bottom: 50px; position:relative; z-index:5; }
-
 .content{ max-width:720px; }
-
 .content h1{ font-family:'Cormorant Garamond',serif; font-size:90px; line-height:.95; font-weight:700; color:white; }
-
 .content h2{ font-family:'Cormorant Garamond',serif; font-size:82px; font-style:italic; line-height:1; color:var(--gold); margin-top:5px; }
-
 .content p{ margin-top:35px; font-size:18px; line-height:1.9; color:var(--text); max-width:600px; }
-
 .hero-btn{ display:inline-block; margin-top:35px; padding:16px 32px; background:var(--gold); color:white; text-decoration:none; border-radius:5px; font-size:16px; transition:.3s; }
-
 .hero-btn:hover{ transform:translateY(-4px); background: #bf812a; }
-
 .hero-right{ width:45%; position:relative; }
-
 .hero-right img{ width:100%; height:100%; object-fit:cover; }
-
 .hero-right::before{ content:''; position:absolute; left:-250px; top:0; height:100%; width:450px; background:linear-gradient(90deg, #071b36 0%, rgba(7,27,54,.95) 40%, rgba(7,27,54,.75) 60%, rgba(7,27,54,0) 100%); z-index:2; }
 
-
-
 /* STATS */
-
 .record{ padding:100px 50px; border-top:1px solid rgba(255,255,255,.06); background: radial-gradient(circle at center, rgba(20,70,130,.35), transparent 60%); }
-
 .record h2{ text-align:center; font-family:'Cormorant Garamond',serif; font-size:60px; font-weight:700; margin-bottom:15px; }
-
 .line { width:70px; height:3px; background:var(--gold); margin:auto; margin-bottom:60px; }
-
 .cards{ display:grid; grid-template-columns:repeat(4,1fr); gap:25px; }
-
 .card{ background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:40px; text-align:center; backdrop-filter:blur(8px); transition:.3s; }
-
 .icon{ font-size:45px; margin-bottom:15px; color:var(--gold); }
-
 .number{ font-family:'Cormorant Garamond',serif; font-size:60px; font-weight:700; }
-
 .label{ font-size:18px; margin-top:10px; color:#d5d5d5; }
 
-
-
-@media(max-width:1100px){
-
-  .hero{ flex-direction:column; height:auto; }
-
+/* RESPONSIVE MEDIA QUERIES */
+@media screen and (max-width: 1100px){
+  header { padding: 18px 25px; }
+  .logo-text { display: none; }
+  .hero{ flex-direction:column; min-height:auto; }
   .hero-left, .hero-right{ width:100%; }
-
-  .hero-right{ height:450px; }
-
-  .content{ padding-top:120px; padding-bottom:60px; }
-
+  .hero-left{ padding: 40px 25px; }
+  .hero-right{ height:350px; }
+  .hero-right::before { display: none; }
+  .content{ padding-top:20px; padding-bottom:20px; }
   .cards{ grid-template-columns:repeat(2,1fr); }
-
-  nav, .logo-text{ display:none; }
-
 }
 
-@media(max-width:768px){
-
-  .content h1{ font-size:60px; } .content h2{ font-size:55px; } .hero-left{ padding:25px; }
-
-  .cards{ grid-template-columns:1fr; }
-
+@media screen and (max-width: 768px){
+  header { flex-direction: column; padding: 15px; gap: 15px; text-align: center; }
+  .logo-wrap { justify-content: center; }
+  nav { flex-wrap: wrap; justify-content: center; gap: 15px; }
+  nav a { font-size: 14px; }
+  .hero { padding-top: 150px; }
+  .content h1{ font-size:52px; }
+  .content h2{ font-size:45px; }
+  .content p{ font-size:15px; margin-top: 20px; }
+  .record{ padding:60px 20px; }
+  .record h2{ font-size:40px; }
+  .cards{ grid-template-columns:1fr; gap: 15px; }
+  .card{ padding:25px; }
 }
-
 </style>
-
 </head>
-
 <body>
 
-
-
 <header>
-
   <div class="logo-wrap">
-
     <a href="index.html" class="logo">Smriti<span>স্মৃতি</span></a>
-
     <div class="logo-text">A Flood Archive of Bangladesh</div>
-
   </div>
-
   <nav>
-
     <a href="gallery.html">2024 Gallery</a>
-
     <a href="about.html">About</a>
-
     <a href="testimony.html">Testimony</a>
-
     <a href="newspaper.html">Newspaper Clipping</a>
-
     <a href="historical.html">Historical Context</a>
-
   </nav>
-
 </header>
 
-
-
 <section class="hero">
-
   <div class="hero-left">
-
     <div class="content">
-
       <h1>Water does not forget.</h1>
-
       <h2>Neither do we.</h2>
-
       <p>A living record of Bangladesh's floods — their human weight, the communities that endured them, and the stories that numbers alone cannot carry. Beginning with the historic August 2024 floods in Feni, Noakhali, and Cumilla.</p>
-
       <a href="gallery.html" class="hero-btn">Explore Archive →</a>
-
     </div>
-
   </div>
-
   <div class="hero-right">
-
     <img src="image/05.jpg" alt="Flood">
-
   </div>
-
 </section>
-
-
 
 <section class="record">
-
   <h2>The Record So Far</h2>
-
   <div class="line"></div>
-
   <div class="cards">
-
     <div class="card"><div class="icon">≋</div><div class="number">21+</div><div class="label">Flood Events</div></div>
-
     <div class="card"><div class="icon">📷</div><div class="number">30+</div><div class="label">Historical Photos</div></div>
-
     <div class="card"><div class="icon">📍</div><div class="number">10+</div><div class="label">District Records</div></div>
-
     <div class="card"><div class="icon">📖</div><div class="number">10+</div><div class="label">Stories Collected</div></div>
-
   </div>
-
 </section>
 
-
-
 </body>
-
 </html>

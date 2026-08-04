@@ -19,7 +19,7 @@ header{ position:fixed; top:0; left:0; width:100%; padding:18px 40px; display:fl
 nav{ display:flex; gap:35px; }
 nav a{ text-decoration:none; color:white; font-size:16px; font-weight: 500; transition:.3s; }
 nav a:hover, nav a.active{ color:var(--gold); }
-.nav-btn{ padding:12px 24px; background:var(--gold); color:white; text-decoration:none; border-radius:4px; font-weight:500; transition: 0.3s; }
+.nav-btn{ padding:12px 24px; background:var(--gold); color:white; text-decoration:none; border-radius:4px; font-weight:500; transition: 0.3s; display: inline-block; }
 .nav-btn:hover { background: #bf812a; }
 
 /* CONTENT STYLING */
@@ -51,8 +51,29 @@ nav a:hover, nav a.active{ color:var(--gold); }
 .cta-box em { color: var(--gold); font-weight: 500; font-style: normal; }
 .footer-note { font-size: 14px; color: var(--text-dim); margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; }
 
-@media(max-width:1100px) { nav, .logo-text { display: none; } }
-@media(max-width:768px) { .hero-concept h1 { font-size: 40px; } .hero-concept h1 span { font-size: 32px; } .hero-lead { font-size: 18px; } .sub-title { font-size: 28px; } }
+/* RESPONSIVE MEDIA QUERIES */
+@media screen and (max-width: 1100px) {
+  header { padding: 18px 25px; }
+  .logo-text { display: none; }
+}
+
+@media screen and (max-width: 768px) {
+  body { padding-top: 160px; }
+  header { flex-direction: column; padding: 15px; gap: 15px; text-align: center; }
+  .logo-wrap { justify-content: center; }
+  nav { flex-wrap: wrap; justify-content: center; gap: 15px; }
+  nav a { font-size: 14px; }
+  .container { padding: 20px 15px 60px 15px; }
+  .hero-concept { margin-bottom: 40px; }
+  .hero-concept h1 { font-size: 38px; }
+  .hero-concept h1 span { font-size: 32px; }
+  .hero-lead { font-size: 16px; }
+  .narrative-p { font-size: 15px; }
+  .sub-title { font-size: 26px; margin-top: 40px; padding-left: 15px; }
+  .belief-card { padding: 20px; }
+  .belief-card h3 { font-size: 20px; }
+  .cta-box { margin-top: 50px; padding: 25px 15px; }
+}
 </style>
 </head>
 <body>
