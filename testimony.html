@@ -23,7 +23,7 @@ nav a:hover, nav a.active{ color:var(--gold); }
 /* MAIN LAYOUT */
 .main-section { padding: 40px 50px 100px 50px; max-width: 1400px; margin: 0 auto; }
 
-/* TESTIMONY GRID (3 COLUMNS DEFAULT) */
+/* TESTIMONY GRID (3 COLUMNS AS PER 05.PNG) */
 .testimony-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 20px; }
 .testimony-card { background: #081a33; border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; padding: 45px 35px; position: relative; transition: 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; min-height: 520px; cursor: pointer; }
 .testimony-card.highlighted { border: 1px solid #d99635; }
@@ -40,19 +40,23 @@ nav a:hover, nav a.active{ color:var(--gold); }
 .author-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: white; margin-bottom: 4px; }
 .author-location { color: var(--gold); font-size: 14px; font-weight: 500; letter-spacing: 0.5px; }
 
+/* CONSENT TEXT UNDERNEATH GRID */
+.consent-text { margin-top: 45px; text-align: center; color: var(--text-dim); font-size: 14px; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+.consent-text strong { color: var(--gold); font-weight: 600; }
+
 /* MODAL CONTAINER */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 14, 28, 0.9); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
 .modal-overlay.active { display: flex; }
-.modal-box { background: #0b2240; border: 1px solid rgba(217, 150, 53, 0.3); border-radius: 16px; max-width: 750px; width: 100%; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 20px 40px rgba(0,0,0,0.5); animation: fadeIn 0.3s ease; position: relative; }
+.modal-box { background: #0b2240; border: 1px solid rgba(217, 150, 53, 0.3); border-radius: 16px; max-width: 750px; width: 100%; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 20px 40px rgba(0,0,0,0.5); animation: fadeIn 0.3s ease; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 .modal-header { padding: 30px 40px; border-bottom: 1px solid rgba(255,255,255,0.06); position: relative; }
-.modal-close { position: absolute; top: 30px; right: 40px; background: none; border: none; color: var(--text-dim); font-size: 30px; cursor: pointer; transition: 0.2s; line-height: 1; }
+.modal-close { position: absolute; top: 30px; right: 40px; background: none; border: none; color: var(--text-dim); font-size: 30px; cursor: pointer; transition: 0.2s; }
 .modal-close:hover { color: var(--gold); }
 
 .modal-meta { font-size: 12px; color: var(--gold); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
-.modal-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700; color: white; line-height: 1.2; padding-right: 25px; }
+.modal-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700; color: white; line-height: 1.2; }
 .modal-author { font-size: 14px; color: var(--text-dim); margin-top: 5px; }
 
 .modal-body { padding: 40px; overflow-y: auto; font-size: 16px; color: #d7dce4; text-align: justify; }
@@ -64,31 +68,8 @@ nav a:hover, nav a.active{ color:var(--gold); }
 .modal-body::-webkit-scrollbar-thumb { background: rgba(217, 150, 53, 0.3); border-radius: 4px; }
 .modal-body::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 
-/* RESPONSIVE MEDIA QUERIES */
-@media screen and (max-width: 1024px) {
-  header { padding: 20px 30px; }
-  .testimony-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  nav { gap: 20px; }
-}
-
-@media screen and (max-width: 768px) {
-  body { padding-top: 160px; }
-  header { flex-direction: column; padding: 15px; gap: 15px; text-align: center; }
-  .logo-wrap { justify-content: center; }
-  .logo-text { display: none; }
-  nav { flex-wrap: wrap; justify-content: center; gap: 15px; }
-  nav a { font-size: 14px; }
-  .main-section { padding: 30px 20px 60px 20px; }
-  .testimony-grid { grid-template-columns: 1fr; gap: 20px; }
-  .testimony-card { padding: 35px 25px; min-height: auto; }
-  
-  .modal-overlay { padding: 12px; }
-  .modal-box { max-height: 90vh; }
-  .modal-header { padding: 20px 25px; }
-  .modal-close { top: 20px; right: 20px; }
-  .modal-title { font-size: 24px; }
-  .modal-body { padding: 25px 20px; font-size: 15px; }
-}
+@media(max-width:1200px) { nav, .logo-text { display: none; } .testimony-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:800px) { .testimony-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -156,13 +137,18 @@ nav a:hover, nav a.active{ color:var(--gold); }
     </div>
 
   </div>
+
+  <!-- CONSENT STATEMENT PLACED DIRECTLY UNDERNEATH THE CARDS -->
+  <p class="consent-text">
+    <strong>Consent & Ethical Archiving:</strong> Every story recorded in Smriti is published with the author's explicit consent. We respect contributor privacy and offer full anonymity upon request.
+  </p>
 </section>
 
 <!-- MODAL 1: IMRAN HASAN -->
 <div class="modal-overlay" id="modal-imran" onclick="closeModal(event, 'modal-imran')">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-header">
-      <button class="modal-close" onclick="document.getElementById('modal-imran').classList.remove('active'); document.body.style.overflow = 'auto';">&times;</button>
+      <button class="modal-close" onclick="document.getElementById('modal-imran').classList.remove('active')">&times;</button>
       <div class="modal-meta">Feni Flood Archive, 2024</div>
       <h3 class="modal-title">Five Days of Silence</h3>
       <div class="modal-author"><strong>Interviewee:</strong> Imran Hasan | Chhagalnaiya, Feni (Living Abroad)</div>
@@ -194,7 +180,7 @@ nav a:hover, nav a.active{ color:var(--gold); }
 <div class="modal-overlay" id="modal-sayed" onclick="closeModal(event, 'modal-sayed')">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-header">
-      <button class="modal-close" onclick="document.getElementById('modal-sayed').classList.remove('active'); document.body.style.overflow = 'auto';">&times;</button>
+      <button class="modal-close" onclick="document.getElementById('modal-sayed').classList.remove('active')">&times;</button>
       <div class="modal-meta">Feni Flood Archive, 2024</div>
       <h3 class="modal-title">An Unprecedented Crisis: Submerged but Unbroken</h3>
       <div class="modal-author"><strong>Interviewee:</strong> Abu Sayed Mozumder, Age: 27 | Feni Sadar, Feni</div>
@@ -216,7 +202,7 @@ nav a:hover, nav a.active{ color:var(--gold); }
 <div class="modal-overlay" id="modal-habib" onclick="closeModal(event, 'modal-habib')">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-header">
-      <button class="modal-close" onclick="document.getElementById('modal-habib').classList.remove('active'); document.body.style.overflow = 'auto';">&times;</button>
+      <button class="modal-close" onclick="document.getElementById('modal-habib').classList.remove('active')">&times;</button>
       <div class="modal-meta">Feni Flood Archive, 2024</div>
       <h3 class="modal-title">The Night the Water Came Without Warning</h3>
       <div class="modal-author"><strong>Interviewee:</strong> Kazi Golam Habib | Feni City, Feni District</div>
